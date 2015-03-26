@@ -14,4 +14,3 @@ vignettes/*.pdf
 
 # dataset files
 *.csv
-datasets/*.csv
