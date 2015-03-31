@@ -16,7 +16,9 @@
 - 如果采用`事物`，效率能否再提高？
 - 一般情况下，如何确定是`python`导致导入速度慢还是`mysql语句`使用不当导致导入速度慢？
 
-参考资料：
+## 参考资料：
 [MySQL批量SQL插入性能优化](http://blog.csdn.net/xiaoxian8023/article/details/20155429)
+
 [sql存储过程总结](http://blog.chinaunix.net/uid-24929997-id-3080734.html)
+
 [java调用存储过程实现批量入库](http://www.360doc.com/content/11/0322/15/1107705_103532123.shtml)
