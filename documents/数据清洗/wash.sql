@@ -84,7 +84,7 @@ create table washed.user_click as
 
    /*2.过滤掉从未买过用户的记录,剩下的是有购买记录的人*/   /*已执行 ！*/
 
-create table washed.tianchi_p_10_nobuy as
+create table washed.tianchi_p_10_buy as
     select user_id,item_id,item_category,behavior_type,user_geohash,event_date,event_time from
 	(
 	select user_id,item_id,item_category,behavior_type,user_geohash,event_date,event_time,buytime from
@@ -98,7 +98,7 @@ create table washed.tianchi_p_10_nobuy as
 /*总结：*/  
 /* tianchi_p          中包含所有用户对商品子集中商品的操作记录*/
 /* tianchi_p_10       中包含所有在最后十天有操作的用户对商品子集中商品的操作记录*/
-/* tianchi_p_10_nobuy 中包含所有在最后十天有操作且有购买记录的用户对商品子集中商品的操作记录*/
+/* tianchi_p_10_buy 中包含所有在最后十天有操作且有购买记录的用户对商品子集中商品的操作记录*/
 
 /*另外值得注意的是：要对从未购买过商品子集中商品，但是最后几天对这些商品有频繁交互行为的用户单独进行挖掘*/
 
