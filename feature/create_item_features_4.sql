@@ -29,7 +29,8 @@ create table test.item_buy_times_diff_days as
     from
     (select item_id,user_id,times as times1 from test.buy_many_times) as a
     left outer join
-    (select item_id as item_id_1,user_id as user_id_1, times as times2 from test.buy_many_times_in_1_day) as b
+    (select item_id as item_id_1,user_id as user_id_1, times as times2 
+        from test.buy_many_times_in_1_day) as b
     on a.item_id=b.item_id_1 and a.user_id=b.user_id_1;
 delete from test.item_buy_times_diff_days where times<=1;
 
@@ -39,7 +40,8 @@ create table feature.train_item_l28_distinct_day_buy as
 	select item_id,ifnull(repeat_user,0) as user from
     (select item_id from washed.item_subset) as a
     left outer join
-    (select item_id as item_id_1,count(user_id) as repeat_user from test.item_buy_times_diff_days group by user_id) as b
+    (select item_id as item_id_1,count(user_id) as repeat_user 
+        from test.item_buy_times_diff_days group by item_id_1) as b
     on a.item_id=b.item_id_1;
     
 drop table test.buy;
@@ -80,7 +82,8 @@ create table test.item_buy_times_diff_days as
     from
     (select item_id,user_id,times as times1 from test.buy_many_times) as a
     left outer join
-    (select item_id as item_id_1,user_id as user_id_1, times as times2 from test.buy_many_times_in_1_day) as b
+    (select item_id as item_id_1,user_id as user_id_1, times as times2 
+        from test.buy_many_times_in_1_day) as b
     on a.item_id=b.item_id_1 and a.user_id=b.user_id_1;
 delete from test.item_buy_times_diff_days where times<=1;
 
@@ -90,7 +93,8 @@ create table feature.pre_item_l28_distinct_day_buy as
 	select item_id,ifnull(repeat_user,0) as user from
     (select item_id from washed.item_subset) as a
     left outer join
-    (select item_id as item_id_1,count(user_id) as repeat_user from test.item_buy_times_diff_days group by user_id) as b
+    (select item_id as item_id_1,count(user_id) as repeat_user 
+        from test.item_buy_times_diff_days group by item_id_1) as b
     on a.item_id=b.item_id_1;
     
 drop table test.buy;
@@ -106,7 +110,7 @@ create table feature.train_item_l28_rebuyrate as
     from (select item_id,user from feature.train_item_l28_distinct_day_buy) as a
     left outer join
     (select item_id as item_id_1,count(distinct user_id) as user_sum from washed.tianchi_p_1_30
-    where behavior_type=4 group by item_id) as b
+    where behavior_type=4 group by item_id_1) as b
     on a.item_id=b.item_id_1;
     
 drop table if exists feature.pre_item_l28_rebuyrate;
@@ -115,7 +119,7 @@ create table feature.pre_item_l28_rebuyrate as
     from (select item_id,user from feature.pre_item_l28_distinct_day_buy) as a
     left outer join
     (select item_id as item_id_1,count(distinct user_id) as user_sum from washed.tianchi_p_2_31
-    where behavior_type=4 group by item_id) as b
+    where behavior_type=4 group by item_id_1) as b
     on a.item_id=b.item_id_1;
 
 # ============================================================================   
