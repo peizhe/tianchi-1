@@ -40,7 +40,7 @@ create table feature.train_category_l28_distinct_day_buy as
 	select category_id,ifnull(repeat_user,0) as user from
     (select category_id from washed.category_subset) as a
     left outer join
-    (select item_category as item_category_1,count(user_id) as repeat_user 
+    (select item_category as item_category_1,count(distinct user_id) as repeat_user 
         from test.category_buy_times_diff_days group by item_category_1) as b
     on a.category_id=b.item_category_1;
     
@@ -93,7 +93,7 @@ create table feature.pre_category_l28_distinct_day_buy as
     select category_id,ifnull(repeat_user,0) as user from
     (select category_id from washed.category_subset) as a
     left outer join
-    (select item_category as item_category_1,count(user_id) as repeat_user 
+    (select item_category as item_category_1,count(distinct user_id) as repeat_user 
         from test.category_buy_times_diff_days group by item_category_1) as b
     on a.category_id=b.item_category_1;
     
