@@ -37,7 +37,7 @@ delete from test.category_buy_times_diff_days where times<=1;
 # 统计商品总共被多少人在不同天买过
 drop table if exists feature.train_category_l28_distinct_day_buy;
 create table feature.train_category_l28_distinct_day_buy as
-	select category_id,ifnull(repeat_user,0) as user from
+	select category_id,ifnull(repeat_user,0) as category_distinct_day_buy from
     (select category_id from washed.category_subset) as a
     left outer join
     (select item_category as item_category_1,count(distinct user_id) as repeat_user 
@@ -90,7 +90,7 @@ delete from test.category_buy_times_diff_days where times<=1;
 # 统计商品总共被多少人在不同天买过
 drop table if exists feature.pre_category_l28_distinct_day_buy;
 create table feature.pre_category_l28_distinct_day_buy as
-    select category_id,ifnull(repeat_user,0) as user from
+    select category_id,ifnull(repeat_user,0) as category_distinct_day_buy from
     (select category_id from washed.category_subset) as a
     left outer join
     (select item_category as item_category_1,count(distinct user_id) as repeat_user 
@@ -106,8 +106,8 @@ drop table test.category_buy_times_diff_days;
 
 drop table if exists feature.train_category_l28_rebuyrate;
 create table feature.train_category_l28_rebuyrate as
-	select category_id,ifnull(user/user_sum,0) as rebuy_rate
-    from (select category_id,user from feature.train_category_l28_distinct_day_buy) as a
+	select category_id,ifnull(category_distinct_day_buy/user_sum,0) as category_rebuy_rate
+    from (select category_id,category_distinct_day_buy from feature.train_category_l28_distinct_day_buy) as a
     left outer join
     (select item_category as item_category_1,count(distinct user_id) as user_sum 
         from washed.tianchi_p_1_30
@@ -116,8 +116,8 @@ create table feature.train_category_l28_rebuyrate as
     
 drop table if exists feature.pre_category_l28_rebuyrate;
 create table feature.pre_category_l28_rebuyrate as
-    select category_id,ifnull(user/user_sum,0) as rebuy_rate
-    from (select category_id,user from feature.pre_category_l28_distinct_day_buy) as a
+    select category_id,ifnull(category_distinct_day_buy/user_sum,0) as category_rebuy_rate
+    from (select category_id,category_distinct_day_buy from feature.pre_category_l28_distinct_day_buy) as a
     left outer join
     (select item_category as item_category_1,count(distinct user_id) as user_sum 
         from washed.tianchi_p_2_31

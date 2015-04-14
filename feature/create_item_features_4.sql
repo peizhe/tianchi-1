@@ -37,7 +37,7 @@ delete from test.item_buy_times_diff_days where times<=1;
 # 统计商品总共被多少人在不同天买过
 drop table if exists feature.train_item_l28_distinct_day_buy;
 create table feature.train_item_l28_distinct_day_buy as
-	select item_id,ifnull(repeat_user,0) as user from
+	select item_id,ifnull(repeat_user,0) as item_distinct_day_buy from
     (select item_id from washed.item_subset) as a
     left outer join
     (select item_id as item_id_1,count(distinct user_id) as repeat_user 
@@ -90,7 +90,7 @@ delete from test.item_buy_times_diff_days where times<=1;
 # 统计商品总共被多少人在不同天买过
 drop table if exists feature.pre_item_l28_distinct_day_buy;
 create table feature.pre_item_l28_distinct_day_buy as
-	select item_id,ifnull(repeat_user,0) as user from
+	select item_id,ifnull(repeat_user,0) as item_distinct_day_buy from
     (select item_id from washed.item_subset) as a
     left outer join
     (select item_id as item_id_1,count(distinct user_id) as repeat_user 
@@ -106,8 +106,8 @@ drop table test.item_buy_times_diff_days;
 
 drop table if exists feature.train_item_l28_rebuyrate;
 create table feature.train_item_l28_rebuyrate as
-	select item_id,ifnull(user/user_sum,0) as rebuy_rate
-    from (select item_id,user from feature.train_item_l28_distinct_day_buy) as a
+	select item_id,ifnull(item_distinct_day_buy/user_sum,0) as item_rebuy_rate
+    from (select item_id,item_distinct_day_buy from feature.train_item_l28_distinct_day_buy) as a
     left outer join
     (select item_id as item_id_1,count(distinct user_id) as user_sum from washed.tianchi_p_1_30
     where behavior_type=4 group by item_id_1) as b
@@ -115,11 +115,21 @@ create table feature.train_item_l28_rebuyrate as
     
 drop table if exists feature.pre_item_l28_rebuyrate;
 create table feature.pre_item_l28_rebuyrate as
-    select item_id,ifnull(user/user_sum,0) as rebuy_rate
-    from (select item_id,user from feature.pre_item_l28_distinct_day_buy) as a
+    select item_id,ifnull(item_distinct_day_buy/user_sum,0) as item_rebuy_rate
+    from (select item_id,item_distinct_day_buy from feature.pre_item_l28_distinct_day_buy) as a
     left outer join
     (select item_id as item_id_1,count(distinct user_id) as user_sum from washed.tianchi_p_2_31
     where behavior_type=4 group by item_id_1) as b
     on a.item_id=b.item_id_1;
 
 # ============================================================================   
+
+drop table if exists feature.item_d12_buy_user;
+create table feature.item_d12_buy_user as
+	select item_id, ifnull(user,0) as d12_buy_user from
+    (select item_id from washed.item_subset) as a
+    left outer join
+    (select item_id as item_id_b, count(distinct user_id) as user from
+    washed.tianchi_p_ten_1_30 where event_date in (24,25) and behavior_type=4
+    group by item_id_b) as be
+    on item_id=item_id_b;
