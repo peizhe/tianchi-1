@@ -4,7 +4,7 @@
 
 """
 import numpy as np
-# from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.ensemble import GradientBoostingClassifier
 # from sklearn.ensemble import RandomForestClassifer
 from sklearn.linear_model import LogisticRegression
 from sklearn.externals import joblib
@@ -74,20 +74,19 @@ def disconnect_database(conn,cur):
 if __name__ == "__main__":
     #Connect database and get data
     [conn,cur]=connect_database()
-    training_data=fetch_data(cur,'train_103_1_9dot6')
-    training_groundtruth=fetch_data(cur,'train_ifbuy_1_9dot6',except_fields=[('',)])
+    training_data=fetch_data(cur,'train_103_1_10')
+    training_groundtruth=fetch_data(cur,'train_ifbuy_1_10',except_fields=[('',)])
     testing_data=fetch_data(cur,'pre_ui_user_item_category')
     print training_data.shape,training_groundtruth.shape
     #Logistic Regression
-    logistic_param={'penalty':'l2','dual':False,'class_weight':'auto','max_iter':500,
-    'solver':'newton-cg'}
-    model_logistic_regression=LogisticRegression(**logistic_param)
-    model_logistic_regression.fit(training_data,training_groundtruth)
+    # logistic_param={'penalty':'l2','dual':False,'class_weight':'auto','max_iter':500}
+    # model_logistic_regression=LogisticRegression()
+    # model_logistic_regression.fit(training_data,training_groundtruth)
 
-    testing_result_lr=model_logistic_regression.predict_proba(testing_data)
-    testing_result_lr_class=model_logistic_regression.predict(testing_data)
-    joblib.dump(testing_result_lr,'lr.model')
-    joblib.dump(testing_result_lr_class,'lr_class.model')
+    # testing_result_lr=model_logistic_regression.predict_proba(testing_data)
+    # testing_result_lr_class=model_logistic_regression.predict(testing_data)
+    # joblib.dump(testing_result_lr,'lr.model_new_trainval')
+    # joblib.dump(testing_result_lr_class,'lr_class.model_new_trainval')
 
     # #Random Forest
     # rand_forest_param={"n_estimators":, "criterion":, "max_depth":}
@@ -100,10 +99,14 @@ if __name__ == "__main__":
 
     # #GBRT
     # GBRT_param={"max_depth":,"n_estimators":,"learning_rate":}
-    # model_GBRT=GradientBoostingClassifier(**GBRT_param)
-    # model_GBRT.fit(training_data,training_groundtruth)
+    model_GBRT=GradientBoostingClassifier()
+    model_GBRT.fit(training_data,training_groundtruth)
 
-    # testing_result_gbrt=model.predict_proba(testing_data)
+    testing_result_gbrt=model_GBRT.predict_proba(testing_data)
+    testing_result_gbrt_class=model_GBRT.predict(testing_data)
+
+    joblib.dump(testing_result_gbrt,'gbrt.model_new_test')
+    joblib.dump(testing_result_gbrt_class,'gbrt_class.model_new_test')
 
     # #For incremental learning with GBRT
     # model_GBRT_inc=GradientBoostingClassifier(warm_start=True)
