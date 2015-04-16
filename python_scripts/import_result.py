@@ -61,13 +61,13 @@ def converFormat(Array):
 #     "tianchi")
 # Cursor=Database.cursor()
 
-Result=joblib.load('gbrt.model_new_trainval')
+Result=joblib.load('rf.model_new_test')
 # print Result
 [conn,cur]=connect_database()
 testing_data=fetch_data(cur,'pre_ui_user_item_category')
 total=0
-csv=file('result.csv','w')
-Temp='user_id,item_id\n'
+csv=file('result.csv2','w')
+Temp='user_id,item_id\r\n'
 # csv.close()# csv=file('result.csv','w+')
 # Temp=''
 # for Elem in ResultList:
@@ -75,24 +75,24 @@ Temp='user_id,item_id\n'
 # csv.write(Temp)
 # csv.close()
 for i,item in enumerate(Result):
-    if item[1]>0.8:
+    if item[1]>0.3:
         total+=1
-        Temp=Temp+str(testing_data[i][0])+','+str(testing_data[i][1])+'\n'
-
-# SQL="drop table if exists result.prediction;"
-# cur.execute(SQL)
-# SQL="create table result.prediction(user_id int,item_id int);"
-# cur.execute(SQL)
-# for i,item in enumerate(Result):
-# 	# print item
-# 	if item[1]>0.8:
-# 		total=total+1
-# 		cur.execute('insert into result.prediction values (%s,%s)',testing_data[i])
-# cur.close();
-# conn.commit()
-# conn.close
+        Temp=Temp+str(testing_data[i][0])+','+str(testing_data[i][1])+'\r\n'
+total=0;
+SQL="drop table if exists result.prediction;"
+cur.execute(SQL)
+SQL="create table result.prediction(user_id int,item_id int);"
+cur.execute(SQL)
+for i,item in enumerate(Result):
+	# print item
+	if item[1]>0.3:
+		total=total+1
+		# cur.execute('insert into result.prediction values (%s,%s)',testing_data[i])
+cur.close();
+conn.commit()
+conn.close
 print total
-print Temp
+# print Temp
 csv.write(Temp)
 csv.close()
 # ResultList=converFormat(Result)

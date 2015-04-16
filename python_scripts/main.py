@@ -5,8 +5,11 @@
 """
 import numpy as np
 from sklearn.ensemble import GradientBoostingClassifier
-# from sklearn.ensemble import RandomForestClassifer
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import Lasso
+from sklearn.linear_model import Ridge
+from sklearn.linear_model import BayesianRidge
 from sklearn.externals import joblib
 import pickle
 
@@ -79,8 +82,8 @@ if __name__ == "__main__":
     testing_data=fetch_data(cur,'pre_ui_user_item_category')
     print training_data.shape,training_groundtruth.shape
     #Logistic Regression
-    # logistic_param={'penalty':'l2','dual':False,'class_weight':'auto','max_iter':500}
-    # model_logistic_regression=LogisticRegression()
+    # logistic_param={'penalty':'l1','dual':False,'class_weight':'auto','max_iter':500}
+    # model_logistic_regression=LogisticRegression(**logistic_param)
     # model_logistic_regression.fit(training_data,training_groundtruth)
 
     # testing_result_lr=model_logistic_regression.predict_proba(testing_data)
@@ -89,29 +92,49 @@ if __name__ == "__main__":
     # joblib.dump(testing_result_lr_class,'lr_class.model_new_trainval')
 
     # #Random Forest
+    print "Training with Radom Forest"
     # rand_forest_param={"n_estimators":, "criterion":, "max_depth":}
-    # model_rand_forest=RandomForestClassifer(**rand_forest_param)
-    # model_rand_forest.fit(training_data,training_groundtruth)
+    model_rand_forest=RandomForestClassifier()
+    model_rand_forest.fit(training_data,training_groundtruth)
+    print model_rand_forest
 
-    # testing_result_rf=model_rand_forest.predict_proba(testing_data)
-
+    testing_result_rf=model_rand_forest.predict_proba(testing_data)
+    joblib.dump(testing_result_rf,'rf.model_new_test')
+    # joblib.dump(testing_result_lr_class,'lr_class.model_new_trainval')
 
 
     # #GBRT
     # GBRT_param={"max_depth":,"n_estimators":,"learning_rate":}
-    model_GBRT=GradientBoostingClassifier()
-    model_GBRT.fit(training_data,training_groundtruth)
+    # model_GBRT=GradientBoostingClassifier()
+    # model_GBRT.fit(training_data,training_groundtruth)
 
-    testing_result_gbrt=model_GBRT.predict_proba(testing_data)
-    testing_result_gbrt_class=model_GBRT.predict(testing_data)
+    # testing_result_gbrt=model_GBRT.predict_proba(testing_data)
+    # testing_result_gbrt_class=model_GBRT.predict(testing_data)
 
-    joblib.dump(testing_result_gbrt,'gbrt.model_new_test')
-    joblib.dump(testing_result_gbrt_class,'gbrt_class.model_new_test')
+    # joblib.dump(testing_result_gbrt,'gbrt.model_new_test')
+    # joblib.dump(testing_result_gbrt_class,'gbrt_class.model_new_test')
 
     # #For incremental learning with GBRT
     # model_GBRT_inc=GradientBoostingClassifier(warm_start=True)
     # model_GBRT_inc.fit(training_data,training_groundtruth)
 
+    # #Lasso
+    # print "Training with LASSO"
+    # model_lasso=Lasso()
+    # model_lasso.fit(training_data,training_groundtruth)
+    # testing_result_lasso=model_lasso.predict(testing_data)
+    # testing_result_lasso_class=model_lasso.predict(testing_data)
+    # joblib.dump(testing_result_lasso,'lasso.model_new_trainval')
+    # joblib.dump(testing_result_lasso_class,'lasso_class.model_new_trainval')
+
+    # print "Training with Ridge"
+    # model_ridge=BayesianRidge()
+    # model_ridge.fit(training_data,training_groundtruth)
+    # testing_result_ridge=model_ridge.predict(testing_data)
+    # testing_result_ridge_class=model_ridge.predict(testing_data)
+    # joblib.dump(testing_result_ridge,'ridge.model_new_trainval')
+    # joblib.dump(testing_result_ridge_class,'ridge_class.model_new_trainval')
+   
     # #Weighted-Decision
     # w_gbrt=0.3;
     # w_lr=0.3;
