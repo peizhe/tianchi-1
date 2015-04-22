@@ -1,0 +1,22 @@
+训练用表：
+采用的数据库 newresult
+不区分买和不买：
+训练特征表  train_110_1_10  训练标签表 train_ifbuy_1_10
+
+验证表  vala_ui_user_item   预测表 pre_ui_user_item
+
+区分买和不买：
+
+买过的ui对：
+
+训练特征表  train_110_buy_1_10 、train_110_buy_1_5 
+训练标签表  train_ifbuy_buy_1_10、train_ifbuy_buy_1_5
+
+验证表  vala_ui_user_item_buy   预测表 pre_ui_user_item_buy
+
+未买过的ui对：
+
+训练特征表  train_110_nobuy_1_10 
+训练标签表  train_ifbuy_nobuy_1_10
+
+验证表  vala_ui_user_item_nobuy   预测表 pre_ui_user_item_nobuy
