@@ -1,0 +1,558 @@
+3. 用户对此商品的第一个交互天的点击数、收藏数、购买数
+   用户对此商品的最后一个交互天的点击数、收藏数、购买数
+
+首先要构建一个大表，里面有用户-商品-每天的点击数、收藏数、购买数
+
+drop table if exists test.train_ui_1_buy;
+create table test.train_ui_1_buy as
+    select user_id,item_id,ifnull(ui_1_buy,0) as ui_1_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_1_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=1 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+
+drop table if exists test.train_ui_2_buy;
+create table test.train_ui_2_buy as
+    select user_id,item_id,ifnull(ui_2_buy,0) as ui_2_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_2_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=2 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_3_buy;
+create table test.train_ui_3_buy as
+    select user_id,item_id,ifnull(ui_3_buy,0) as ui_3_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_3_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=3 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_4_buy;
+create table test.train_ui_4_buy as
+    select user_id,item_id,ifnull(ui_4_buy,0) as ui_4_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_4_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=4 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_5_buy;
+create table test.train_ui_5_buy as
+    select user_id,item_id,ifnull(ui_5_buy,0) as ui_5_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_5_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=5 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_6_buy;
+create table test.train_ui_6_buy as
+    select user_id,item_id,ifnull(ui_6_buy,0) as ui_6_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_6_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=6 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_7_buy;
+create table test.train_ui_7_buy as
+    select user_id,item_id,ifnull(ui_7_buy,0) as ui_7_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_7_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=7 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_8_buy;
+create table test.train_ui_8_buy as
+    select user_id,item_id,ifnull(ui_8_buy,0) as ui_8_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_8_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=8 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_9_buy;
+create table test.train_ui_9_buy as
+    select user_id,item_id,ifnull(ui_9_buy,0) as ui_9_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_9_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=9 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_10_buy;
+create table test.train_ui_10_buy as
+    select user_id,item_id,ifnull(ui_10_buy,0) as ui_10_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_10_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=10 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_11_buy;
+create table test.train_ui_11_buy as
+    select user_id,item_id,ifnull(ui_11_buy,0) as ui_11_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_11_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=11 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_12_buy;
+create table test.train_ui_12_buy as
+    select user_id,item_id,ifnull(ui_12_buy,0) as ui_12_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_12_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=12 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+
+drop table if exists test.train_ui_13_buy;
+create table test.train_ui_13_buy as
+    select user_id,item_id,ifnull(ui_13_buy,0) as ui_13_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_13_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=13 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_14_buy;
+create table test.train_ui_14_buy as
+    select user_id,item_id,ifnull(ui_14_buy,0) as ui_14_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_14_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=14 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_15_buy;
+create table test.train_ui_15_buy as
+    select user_id,item_id,ifnull(ui_15_buy,0) as ui_15_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_15_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=15 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_16_buy;
+create table test.train_ui_16_buy as
+    select user_id,item_id,ifnull(ui_16_buy,0) as ui_16_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_16_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=16 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_17_buy;
+create table test.train_ui_17_buy as
+    select user_id,item_id,ifnull(ui_17_buy,0) as ui_17_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_17_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=17 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_18_buy;
+create table test.train_ui_18_buy as
+    select user_id,item_id,ifnull(ui_18_buy,0) as ui_18_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_18_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=18 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_19_buy;
+create table test.train_ui_19_buy as
+    select user_id,item_id,ifnull(ui_19_buy,0) as ui_19_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_19_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=19 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_20_buy;
+create table test.train_ui_20_buy as
+    select user_id,item_id,ifnull(ui_20_buy,0) as ui_20_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_20_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=20 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_21_buy;
+create table test.train_ui_21_buy as
+    select user_id,item_id,ifnull(ui_21_buy,0) as ui_21_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_21_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=21 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_22_buy;
+create table test.train_ui_22_buy as
+    select user_id,item_id,ifnull(ui_22_buy,0) as ui_22_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_22_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=22 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_23_buy;
+create table test.train_ui_23_buy as
+    select user_id,item_id,ifnull(ui_23_buy,0) as ui_23_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_23_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=23 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+
+drop table if exists test.train_ui_24_buy;
+create table test.train_ui_24_buy as
+    select user_id,item_id,ifnull(ui_24_buy,0) as ui_24_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_24_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=24 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_25_buy;
+create table test.train_ui_25_buy as
+    select user_id,item_id,ifnull(ui_25_buy,0) as ui_25_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_25_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=25 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_26_buy;
+create table test.train_ui_26_buy as
+    select user_id,item_id,ifnull(ui_26_buy,0) as ui_26_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_26_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=26 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_27_buy;
+create table test.train_ui_27_buy as
+    select user_id,item_id,ifnull(ui_27_buy,0) as ui_27_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_27_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=27 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_28_buy;
+create table test.train_ui_28_buy as
+    select user_id,item_id,ifnull(ui_28_buy,0) as ui_28_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_28_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=28 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_29_buy;
+create table test.train_ui_29_buy as
+    select user_id,item_id,ifnull(ui_29_buy,0) as ui_29_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_29_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=29 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_30_buy;
+create table test.train_ui_30_buy as
+    select user_id,item_id,ifnull(ui_30_buy,0) as ui_30_buy from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_30_buy from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=4 and event_date=30 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+
+
+
+
+
+
+
+
+drop table if exists test.train_ui_1_favor;
+create table test.train_ui_1_favor as
+    select user_id,item_id,ifnull(ui_1_favor,0) as ui_1_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_1_favor from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=2 and event_date=1 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+
+drop table if exists test.train_ui_2_favor;
+create table test.train_ui_2_favor as
+    select user_id,item_id,ifnull(ui_2_favor,0) as ui_2_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_2_favor from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=2 and event_date=2 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_3_favor;
+create table test.train_ui_3_favor as
+    select user_id,item_id,ifnull(ui_3_favor,0) as ui_3_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_3_favor from washed.tianchi_p_ten_buy_1_30
+        where behavior_type=2 and event_date=3 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_4_favor;
+create table test.train_ui_4_favor as
+    select user_id,item_id,ifnull(ui_4_favor,0) as ui_4_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_4_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=4 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_5_favor;
+create table test.train_ui_5_favor as
+    select user_id,item_id,ifnull(ui_5_favor,0) as ui_5_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_5_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=5 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_6_favor;
+create table test.train_ui_6_favor as
+    select user_id,item_id,ifnull(ui_6_favor,0) as ui_6_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_6_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=6 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_7_favor;
+create table test.train_ui_7_favor as
+    select user_id,item_id,ifnull(ui_7_favor,0) as ui_7_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_7_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=7 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_8_favor;
+create table test.train_ui_8_favor as
+    select user_id,item_id,ifnull(ui_8_favor,0) as ui_8_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_8_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=8 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_9_favor;
+create table test.train_ui_9_favor as
+    select user_id,item_id,ifnull(ui_9_favor,0) as ui_9_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_9_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=9 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_10_favor;
+create table test.train_ui_10_favor as
+    select user_id,item_id,ifnull(ui_10_favor,0) as ui_10_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_10_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=10 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_11_favor;
+create table test.train_ui_11_favor as
+    select user_id,item_id,ifnull(ui_11_favor,0) as ui_11_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_11_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=11 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_12_favor;
+create table test.train_ui_12_favor as
+    select user_id,item_id,ifnull(ui_12_favor,0) as ui_12_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_12_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=12 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+
+drop table if exists test.train_ui_13_favor;
+create table test.train_ui_13_favor as
+    select user_id,item_id,ifnull(ui_13_favor,0) as ui_13_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_13_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=13 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_14_favor;
+create table test.train_ui_14_favor as
+    select user_id,item_id,ifnull(ui_14_favor,0) as ui_14_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_14_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=14 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_15_favor;
+create table test.train_ui_15_favor as
+    select user_id,item_id,ifnull(ui_15_favor,0) as ui_15_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_15_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=15 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_16_favor;
+create table test.train_ui_16_favor as
+    select user_id,item_id,ifnull(ui_16_favor,0) as ui_16_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_16_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=16 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_17_favor;
+create table test.train_ui_17_favor as
+    select user_id,item_id,ifnull(ui_17_favor,0) as ui_17_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_17_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=17 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_18_favor;
+create table test.train_ui_18_favor as
+    select user_id,item_id,ifnull(ui_18_favor,0) as ui_18_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_18_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=18 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_19_favor;
+create table test.train_ui_19_favor as
+    select user_id,item_id,ifnull(ui_19_favor,0) as ui_19_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_19_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=19 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_20_favor;
+create table test.train_ui_20_favor as
+    select user_id,item_id,ifnull(ui_20_favor,0) as ui_20_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_20_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=20 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_21_favor;
+create table test.train_ui_21_favor as
+    select user_id,item_id,ifnull(ui_21_favor,0) as ui_21_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_21_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=21 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_22_favor;
+create table test.train_ui_22_favor as
+    select user_id,item_id,ifnull(ui_22_favor,0) as ui_22_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_22_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=22 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_23_favor;
+create table test.train_ui_23_favor as
+    select user_id,item_id,ifnull(ui_23_favor,0) as ui_23_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_23_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=23 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+
+drop table if exists test.train_ui_24_favor;
+create table test.train_ui_24_favor as
+    select user_id,item_id,ifnull(ui_24_favor,0) as ui_24_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_24_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=24 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_25_favor;
+create table test.train_ui_25_favor as
+    select user_id,item_id,ifnull(ui_25_favor,0) as ui_25_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_25_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=25 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_26_favor;
+create table test.train_ui_26_favor as
+    select user_id,item_id,ifnull(ui_26_favor,0) as ui_26_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_26_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=26 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_27_favor;
+create table test.train_ui_27_favor as
+    select user_id,item_id,ifnull(ui_27_favor,0) as ui_27_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_27_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=27 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_28_favor;
+create table test.train_ui_28_favor as
+    select user_id,item_id,ifnull(ui_28_favor,0) as ui_28_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_28_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=28 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_29_favor;
+create table test.train_ui_29_favor as
+    select user_id,item_id,ifnull(ui_29_favor,0) as ui_29_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_29_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=29 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);
+
+drop table if exists test.train_ui_30_favor;
+create table test.train_ui_30_favor as
+    select user_id,item_id,ifnull(ui_30_favor,0) as ui_30_favor from
+    (select distinct user_id,item_id from washed.tianchi_p_ten_buy_1_30)a
+    left outer join
+    (select user_id as user_id_1,item_id as item_id_1,count(behavior_type) as ui_30_favor from washed.tianchi_p_ten_favor_1_40
+        where behavior_type=2 and event_date=30 group by user_id,item_id)b
+    on(a.user_id=b.user_id_1 and a.item_id=b.item_id_1);

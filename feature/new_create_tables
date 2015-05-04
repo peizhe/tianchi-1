@@ -1,0 +1,251 @@
+/* groundtruth */
+drop table if exists washed.tianchi_p_31_buy;
+create table washed.tianchi_p_31_buy as 
+	select distinct user_id,item_id from washed.tianchi_p 
+	where behavior_type=4 and event_date=31
+	order by user_id,item_id;
+
+drop table if exists washed.tianchi_p_30_buy;
+create table washed.tianchi_p_30_buy as 
+	select distinct user_id,item_id from washed.tianchi_p 
+	where behavior_type=4 and event_date=30
+	order by user_id,item_id;
+
+drop table if exists washed.tianchi_p_29_buy;
+create table washed.tianchi_p_29_buy as 
+	select distinct user_id,item_id from washed.tianchi_p 
+	where behavior_type=4 and event_date=29
+	order by user_id,item_id;
+
+
+drop table if exists washed.tianchi_p_28_buy;
+create table washed.tianchi_p_28_buy as 
+	select distinct user_id,item_id from washed.tianchi_p 
+	where behavior_type=4 and event_date=28
+	order by user_id,item_id;
+
+
+11-30   train
+
+
+/* create feature-extracting tables */
+drop table if exists washed.tianchi_p_11_30;
+create table washed.tianchi_p_11_30 as
+	select * from washed.tianchi_p where event_date between 11 and 30;
+
+    /*user in last 10 days need to act*/
+drop table if exists washed.user_act_21_30;
+create table washed.user_act_21_30 as
+	select user_id,count(behavior_type) as acttime from washed.tianchi_p 
+	where event_date between 21 and 30
+	group by user_id;
+
+
+drop table if exists washed.tianchi_p_ten_11_30;
+create table washed.tianchi_p_ten_11_30 as
+	select user_id,item_id,item_category,behavior_type,user_geohash,event_date,event_time from 
+	(select * from washed.tianchi_p_11_30)a
+	right outer join
+	(select user_id as user_id_1 from washed.user_act_21_30)b
+	on(a.user_id=b.user_id_1) order by user_id,item_id;
+
+
+
+    /*user has buyed in total 20 days*/
+drop table if exists washed.user_buy_11_30;
+create table washed.user_buy_11_30 as
+	select user_id,count(behavior_type) as buytime from washed.tianchi_p_ten_11_30 
+	where behavior_type=4 group by user_id;
+
+
+
+drop table if exists washed.tianchi_p_ten_buy_11_30;
+create table washed.tianchi_p_ten_buy_11_30 as
+    select user_id,item_id,item_category,behavior_type,user_geohash,event_date,event_time from
+	(
+	select user_id,item_id,item_category,behavior_type,user_geohash,event_date,event_time,buytime from
+	(select * from washed.tianchi_p_ten_11_30)a
+	left outer join
+	(select user_id as user_id_1,buytime from washed.user_buy_11_30)b
+	on(a.user_id=b.user_id_1)
+	)c
+	where buytime is not null;
+
+
+
+12-31  pre
+
+
+/* create feature-extracting tables */
+drop table if exists washed.tianchi_p_12_31;
+create table washed.tianchi_p_12_31 as
+	select * from washed.tianchi_p where event_date between 12 and 31;
+
+    /*user in last 10 days need to act*/
+drop table if exists washed.user_act_22_31;
+create table washed.user_act_22_31 as
+	select user_id,count(behavior_type) as acttime from washed.tianchi_p 
+	where event_date between 22 and 31
+	group by user_id;
+
+
+drop table if exists washed.tianchi_p_ten_12_31;
+create table washed.tianchi_p_ten_12_31 as
+	select user_id,item_id,item_category,behavior_type,user_geohash,event_date,event_time from 
+	(select * from washed.tianchi_p_12_31)a
+	right outer join
+	(select user_id as user_id_1 from washed.user_act_22_31)b
+	on(a.user_id=b.user_id_1) order by user_id,item_id;
+
+
+
+    /*user has buyed in total 20 days*/
+drop table if exists washed.user_buy_12_31;
+create table washed.user_buy_12_31 as
+	select user_id,count(behavior_type) as buytime from washed.tianchi_p_ten_12_31 
+	where behavior_type=4 group by user_id;
+
+
+
+drop table if exists washed.tianchi_p_ten_buy_12_31;
+create table washed.tianchi_p_ten_buy_12_31 as
+    select user_id,item_id,item_category,behavior_type,user_geohash,event_date,event_time from
+	(
+	select user_id,item_id,item_category,behavior_type,user_geohash,event_date,event_time,buytime from
+	(select * from washed.tianchi_p_ten_12_31)a
+	left outer join
+	(select user_id as user_id_1,buytime from washed.user_buy_12_31)b
+	on(a.user_id=b.user_id_1)
+	)c
+	where buytime is not null;
+
+
+
+
+
+
+
+
+10-29   vala
+
+
+
+
+/* create feature-extracting tables */
+drop table if exists washed.tianchi_p_10_29;
+create table washed.tianchi_p_10_29 as
+	select * from washed.tianchi_p where event_date between 10 and 29;
+
+    /*user in last 10 days need to act*/
+drop table if exists washed.user_act_20_29;
+create table washed.user_act_20_29 as
+	select user_id,count(behavior_type) as acttime from washed.tianchi_p 
+	where event_date between 20 and 29
+	group by user_id;
+
+
+drop table if exists washed.tianchi_p_ten_10_29;
+create table washed.tianchi_p_ten_10_29 as
+	select user_id,item_id,item_category,behavior_type,user_geohash,event_date,event_time from 
+	(select * from washed.tianchi_p_10_29)a
+	right outer join
+	(select user_id as user_id_1 from washed.user_act_20_29)b
+	on(a.user_id=b.user_id_1) order by user_id,item_id;
+
+
+
+    /*user has buyed in total 20 days*/
+drop table if exists washed.user_buy_10_29;
+create table washed.user_buy_10_29 as
+	select user_id,count(behavior_type) as buytime from washed.tianchi_p_ten_10_29 
+	where behavior_type=4 group by user_id;
+
+
+
+drop table if exists washed.tianchi_p_ten_buy_10_29;
+create table washed.tianchi_p_ten_buy_10_29 as
+    select user_id,item_id,item_category,behavior_type,user_geohash,event_date,event_time from
+	(
+	select user_id,item_id,item_category,behavior_type,user_geohash,event_date,event_time,buytime from
+	(select * from washed.tianchi_p_ten_10_29)a
+	left outer join
+	(select user_id as user_id_1,buytime from washed.user_buy_10_29)b
+	on(a.user_id=b.user_id_1)
+	)c
+	where buytime is not null;
+
+
+
+
+
+9-28   valb
+
+
+/* create feature-extracting tables */
+drop table if exists washed.tianchi_p_9_28;
+create table washed.tianchi_p_9_28 as
+	select * from washed.tianchi_p where event_date between 9 and 28;
+
+    /*user in last 10 days need to act*/
+drop table if exists washed.user_act_19_28;
+create table washed.user_act_19_28 as
+	select user_id,count(behavior_type) as acttime from washed.tianchi_p 
+	where event_date between 19 and 28
+	group by user_id;
+
+
+drop table if exists washed.tianchi_p_ten_9_28;
+create table washed.tianchi_p_ten_9_28 as
+	select user_id,item_id,item_category,behavior_type,user_geohash,event_date,event_time from 
+	(select * from washed.tianchi_p_9_28)a
+	right outer join
+	(select user_id as user_id_1 from washed.user_act_19_28)b
+	on(a.user_id=b.user_id_1) order by user_id,item_id;
+
+
+
+    /*user has buyed in total 20 days*/
+drop table if exists washed.user_buy_9_28;
+create table washed.user_buy_9_28 as
+	select user_id,count(behavior_type) as buytime from washed.tianchi_p_ten_9_28 
+	where behavior_type=4 group by user_id;
+
+
+
+drop table if exists washed.tianchi_p_ten_buy_9_28;
+create table washed.tianchi_p_ten_buy_9_28 as
+    select user_id,item_id,item_category,behavior_type,user_geohash,event_date,event_time from
+	(
+	select user_id,item_id,item_category,behavior_type,user_geohash,event_date,event_time,buytime from
+	(select * from washed.tianchi_p_ten_9_28)a
+	left outer join
+	(select user_id as user_id_1,buytime from washed.user_buy_9_28)b
+	on(a.user_id=b.user_id_1)
+	)c
+	where buytime is not null;
+
+
+8-27 valc
+
+
+
+/* create feature-extracting tables */
+drop table if exists washed.tianchi_p_8_27;
+create table washed.tianchi_p_8_27 as
+	select * from washed.tianchi_p where event_date between 8 and 27;
+
+    /*user in last 10 days need to act*/
+drop table if exists washed.user_act_18_27;
+create table washed.user_act_18_27 as
+	select user_id,count(behavior_type) as acttime from washed.tianchi_p 
+	where event_date between 18 and 27
+	group by user_id;
+
+
+drop table if exists washed.tianchi_p_ten_8_27;
+create table washed.tianchi_p_ten_8_27 as
+	select user_id,item_id,item_category,behavior_type,user_geohash,event_date,event_time from 
+	(select * from washed.tianchi_p_8_27)a
+	right outer join
+	(select user_id as user_id_1 from washed.user_act_18_27)b
+	on(a.user_id=b.user_id_1) order by user_id,item_id;

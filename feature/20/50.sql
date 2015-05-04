@@ -1,0 +1,15 @@
+drop table if exists newresult.pre_ui_user_item_50;
+create table newresult.pre_ui_user_item_50 as
+select user_id,item_id,ui_l1_buy,ui_l2_buy,ui_l3_buy,ui_l5_buy,ui_l7_buy,
+ui_l1_clk,ui_l2_clk,ui_l3_clk,ui_l5_clk,ui_l7_clk,
+ui_l_actday_clk,ui_l_actday_favor,ui_l_actday_buy,ui_l_act_date,
+ui_l_act_distance,ui_l3_h1_act,ui_l5_h1_act,ui_l7_h1_act,
+ui_l7_clk2buy,ui_l3_clk2buy,ui_l7_later2buy,ui_l3_later2buy,
+ui_l1_cart,ui_l2_cart,ui_l3_cart,ui_l7_favor,ui_l14_favor,
+ui_l_actnextday_other_distinct_act,ui_l1_h1_only_act,ui_l3_h1_only_act,
+user_l1_clk,user_l3_clk,user_l7_clk,user_l1_buy,user_l3_buy,user_l7_buy,
+user_l7_clk2buy,user_l3_clk2buy,user_l7_later2buy,user_l3_later2buy,
+user_l1_distinct_clk,user_l3_distinct_clk,
+item_l1_buy,item_l3_buy,item_l7_buy,
+item_l1_distinct_buy,item_l3_distinct_buy,
+item_l_buy_date,item_l_act_date,item_ifrebuy from newresult.pre_ui_user_item;
