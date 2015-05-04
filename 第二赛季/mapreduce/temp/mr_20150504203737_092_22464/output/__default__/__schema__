@@ -1,0 +1,3 @@
+project=local
+table=train_ui_test
+columns=user_id:STRING,item_id:STRING,ui_l1_buy:BIGINT,ui_l3_clk:BIGINT,ui_l5_act:BIGINT

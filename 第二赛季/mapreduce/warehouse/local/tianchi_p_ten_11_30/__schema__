@@ -1,0 +1,3 @@
+project=local
+table=tianchi_p_ten_11_30
+columns=user_id:STRING,item_id:STRING,item_category:STRING,behavior_type:BIGINT,user_geohash:STRING,event_date:BIGINT,event_time:STRING
