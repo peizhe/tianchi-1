@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapred>
+    <!-- profile -->
+    <baseId>d5512016c544ed9563f975de7bc4637d</baseId>
+    <projectId>2512</projectId>
+    <resourceName>train_ui_part1</resourceName>
+    <idePath>工作流/train_ui_feature_mapreduce_part1</idePath>
+
+    <!-- classes -->
+    <jobLauncher>my.group.train_ui_part1.JobLauncher</jobLauncher>
+    <mapper>my.group.train_ui_part1.MyMapper</mapper>
+    <reducer>my.group.train_ui_part1.MyReducer</reducer>
+    <combiner></combiner>
+
+    <!--task-->
+    <mapOutputKey>user_id:string,item_id:string</mapOutputKey>
+    <mapOutputValue>
+    ui_l1_buy:bigint,ui_l2_buy:bigint,ui_l3_buy:bigint,ui_l5_buy:bigint,ui_l7_buy:bigint,
+    ui_l10_buy:bigint,ui_l14_buy:bigint,ui_l18_buy:bigint,ui_l1_clk:bigint,ui_l2_clk:bigint,
+    ui_l3_clk:bigint,ui_l5_clk:bigint,ui_l7_clk:bigint,ui_l10_clk:bigint,ui_l14_clk:bigint,
+    ui_l18_clk:bigint,ui_d12_clk:bigint,ui_d12_buy:bigint,ui_l1_cart:bigint,ui_l2_cart:bigint,
+    ui_l3_cart:bigint,ui_l7_cart:bigint,ui_l7_favor:bigint,ui_l14_favor:bigint,ui_l18_favor:bigint,
+    buy_date:bigint,act_date:bigint,ui_l3_later:bigint,ui_l7_later:bigint,ui_l14_later:bigint
+    </mapOutputValue>
+    <!--
+    <partitionColumns>col1,col2</partitionColumns>
+    <outputKeySortColumns>col1,col2</outputKeySortColumns>
+    <outputKeySortOrders>ASC,DESC</outputKeySortOrders>
+    <outputGroupingColumns>col1,col2</outputGroupingColumns>
+    <numReduceTask>8</numReduceTask>
+    <memoryForMapTask>2048</memoryForMapTask>
+    <memoryForReduceTask>2048</memoryForReduceTask>
+    -->
+
+    <!-- tables -->
+    <inputTables>
+        <table>
+            <name>tianchi_p_ten_11_30</name>
+            <partitions></partitions>
+        </table>
+    </inputTables>
+    <outputTable>
+        <name>train_ui_part1</name>
+        <partition></partition>
+    </outputTable>
+</mapred>
