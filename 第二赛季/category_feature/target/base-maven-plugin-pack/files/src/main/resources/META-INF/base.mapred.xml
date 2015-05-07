@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapred>
+    <!-- profile -->
+    <baseId>81e576f4be1875773f7827b736d7fe6c</baseId>
+    <projectId>2512</projectId>
+    <resourceName>pre_category</resourceName>
+    <idePath>工作流/shuai</idePath>
+
+    <!-- classes -->
+    <jobLauncher>my.group.mapreduce.JobLauncher</jobLauncher>
+    <mapper>my.group.mapreduce.MyMapper</mapper>
+    <reducer>my.group.mapreduce.MyReducer</reducer>
+    <combiner></combiner>
+
+    <!--task-->
+    <mapOutputKey>item_category:string</mapOutputKey>
+    <mapOutputValue>behavior_type:bigint,event_date:bigint,user_id:string</mapOutputValue>
+    <!--
+    <partitionColumns>col1,col2</partitionColumns>
+    <outputKeySortColumns>col1,col2</outputKeySortColumns>
+    <outputKeySortOrders>ASC,DESC</outputKeySortOrders>
+    <outputGroupingColumns>col1,col2</outputGroupingColumns>
+    <numReduceTask>8</numReduceTask>
+    <memoryForMapTask>2048</memoryForMapTask>
+    <memoryForReduceTask>2048</memoryForReduceTask>
+    -->
+
+    <!-- tables -->
+    <inputTables>
+        <table>
+            <name>tianchi_p</name>
+            <partitions></partitions>
+        </table>
+    </inputTables>
+    <outputTable>
+        <name>pre_category</name>
+        <partition></partition>
+    </outputTable>
+</mapred>
