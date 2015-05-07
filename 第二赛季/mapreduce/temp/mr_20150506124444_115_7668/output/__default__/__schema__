@@ -1,0 +1,3 @@
+project=local
+table=train_item_l1
+columns=item_id:STRING,item_l1_buy_ave_day:BIGINT,item_l1_act_ave_day:BIGINT

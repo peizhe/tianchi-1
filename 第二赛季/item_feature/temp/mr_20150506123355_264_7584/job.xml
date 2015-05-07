@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><configuration>
+<property><name>odps.mapred.input.desc</name><value>[{"tblName":"tianchi_p","partSpec":{},"label":"__default__"}]</value></property>
+<property><name>odps.mapred.map.class</name><value>my.group.mapreduce.MyMapper</value></property>
+<property><name>odps.mapred.job.name</name><value>mr_20150506123355_264_7584</value></property>
+<property><name>odps.mapred.mapoutput.key.schema</name><value>item_id:STRING</value></property>
+<property><name>odps.mapred.mapoutput.value.schema</name><value>item_l1_buy_ave_day:BIGINT,item_l1_act_ave_day:BIGINT,behavior_type:BIGINT,event_date:BIGINT</value></property>
+<property><name>odps.mapred.output.desc</name><value>[{"tblName":"train_item_l1","partSpec":{},"label":"__default__"}]</value></property>
+<property><name>odps.mapred.reduce.class</name><value>my.group.mapreduce.MyReducer</value></property>
+</configuration>

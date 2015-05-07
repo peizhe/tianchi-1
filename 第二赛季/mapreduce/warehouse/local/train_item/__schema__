@@ -1,0 +1,3 @@
+project=local
+table=train_item
+columns=item_id:string,item_l1_buy:bigint,item_l3_buy:bigint,item_l7_buy:bigint,item_l14_buy:bigint,item_l1_clk:bigint,item_l3_clk:bigint,item_l7_clk:bigint,item_l14_clk:bigint,item_l1_distinct_buy:bigint,item_l3_distinct_buy:bigint,item_l7_distinct_buy:bigint,item_l14_distinct_buy:bigint,item_l1_distinct_clk:bigint,item_l3_distinct_clk:bigint,item_l7_distinct_clk:bigint,item_l14_distinct_clk:bigint,item_l_buy_date:bigint,item_l_clk_date:bigint,item_ifrebuy:bigint,item_distinct_rebuy:bigint
